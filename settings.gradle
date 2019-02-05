@@ -1,1 +1,3 @@
-rootProject.name = 'frida-gradle-java'
+rootProject.name = 'gradle-java-plugin'
+
+

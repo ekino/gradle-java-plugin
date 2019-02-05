@@ -51,7 +51,6 @@ To use this plugin add the maven repository on settings.gradle (must be the firs
 
     pluginManagement {
       repositories {
-        gradlePluginPortal()
         mavenCentral()
       }
     }
@@ -59,5 +58,5 @@ To use this plugin add the maven repository on settings.gradle (must be the firs
 then add the plugin on build.gradle
 
     plugins {
-        id "com.ekino.oss.java" version "0.0.1"
+        id "com.ekino.oss.plugin.java" version "0.0.1"
     }

@@ -2,6 +2,7 @@ plugins {
   id 'java-gradle-plugin'
   id 'groovy'
   id 'maven-publish'
+  id 'signing'
 }
 
 repositories {
@@ -36,29 +37,56 @@ test {
 
 gradlePlugin {
   plugins {
-    fridaGradleJava {
-      id = "com.ekino.oss.plugin.java"
-      implementationClass = "com.ekino.oss.plugin.JavaPlugin"
+    gradleJava {
+      id = "com.ekino.oss.gradle.plugin.java"
+      implementationClass = "com.ekino.oss.gradle.plugin.JavaPlugin"
     }
   }
 }
 
-// Nota Bene : variables ${publishingBaseUrl}, ${publishingLogin} and ${publishingPassword}
-// are provided using Gitlab CI/CD variables (cf Settings > CI/CD > Variables)
-// and prefixed by "ORG_GRADLE_PROJECT_"
+
+
 publishing {
   publications {
     mavenJava(MavenPublication) {
+
+      pom {
+        name = 'Gradle java plugin'
+        description = 'Java plugin applying some configuration for your builds (mavenPublish, testSets, etc ...)'
+        url = 'https://github.com/ekino/gradle-java-plugin'
+        licenses {
+          license {
+            name = 'MIT License (MIT)'
+            url = 'https://opensource.org/licenses/mit-license'
+          }
+        }
+        developers {
+          developer {
+            organization = 'ekino'
+            organizationUrl = 'https://www.ekino.com/'
+          }
+        }
+        scm {
+          connection = 'scm:git:git://github.com/ekino/gradle-java-plugin.git'
+          developerConnection = 'scm:git:ssh://github.com:ekino/gradle-java-plugin.git'
+          url = 'https://github.com/ekino/gradle-java-plugin'
+        }
+      }
+      
       from components.java
     }
   }
   repositories {
     maven {
-      url = "${publishingBaseUrl}${project.version.endsWith('-SNAPSHOT') ? 'snapshots' : 'releases'}/"
+      url = "${project.version.endsWith("SNAPSHOT") ? "https://oss.sonatype.org/content/repositories/snapshots/" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"}"
       credentials {
-        username = "${publishingLogin}"
-        password = "${publishingPassword}"
+        username = "${ossrhUsername}"
+        password = "${ossrhPassword}"
       }
     }
   }
+}
+
+signing {
+  sign publishing.publications.mavenJava
 }
