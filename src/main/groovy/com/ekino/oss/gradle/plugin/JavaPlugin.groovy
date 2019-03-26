@@ -13,7 +13,6 @@ import org.gradle.api.tasks.testing.Test
 class JavaPlugin implements Plugin<Project> {
 
   private static final String JAVA_VERSION = "1.11"
-  private static final String NEXUS_URL = 'https://nexus.ekino.com'
 
   @Override
   void apply(Project project) {
@@ -98,18 +97,6 @@ class JavaPlugin implements Plugin<Project> {
         testSets {
           integrationTest {
             dirName = 'it'
-          }
-        }
-
-        // TODO(sau) to remove after testsets plugin issue would be fixed (https://github.com/unbroken-dome/gradle-testsets-plugin/issues/55)
-        sourceSets {
-          integrationTest {
-            java {
-              srcDir "src/it/java"
-            }
-            resources {
-              srcDir "src/it/resources"
-            }
           }
         }
 

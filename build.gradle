@@ -44,6 +44,11 @@ gradlePlugin {
   }
 }
 
+if (!project.hasProperty("nexusUrl")) {
+  ext.ossrhUsername = "ossrhUsername"
+  ext.ossrhPassword = "ossrhPassword"
+  ext.ossrhUrl = "ossrhUrl"
+}
 
 
 publishing {
@@ -78,13 +83,17 @@ publishing {
   }
   repositories {
     maven {
-      url = "${project.version.endsWith("SNAPSHOT") ? "https://oss.sonatype.org/content/repositories/snapshots/" : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"}"
+      url = ossrhUrl
       credentials {
-        username = "${ossrhUsername}"
-        password = "${ossrhPassword}"
+        username = ossrhUsername
+        password = ossrhPassword
       }
     }
   }
+}
+
+task printVersion {
+  println project.version
 }
 
 signing {
