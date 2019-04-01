@@ -44,10 +44,10 @@ gradlePlugin {
   }
 }
 
-if (!project.hasProperty("nexusUrl")) {
-  ext.ossrhUsername = "ossrhUsername"
-  ext.ossrhPassword = "ossrhPassword"
-  ext.ossrhUrl = "ossrhUrl"
+if (!project.hasProperty("ossrhUrl")) {
+  ext.ossrhUsername = ""
+  ext.ossrhPassword = ""
+  ext.ossrhUrl = ""
 }
 
 

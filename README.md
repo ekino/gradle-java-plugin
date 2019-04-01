@@ -12,7 +12,6 @@ This plugin configures the following tasks for any Ekino Java project :
 * Define the test report files aggregation
 * Replace `${project-version}` and `${project-description}` in YAML files by the gradle project version
 * Define JUnit Platform configuration for JUnit 5 (Jupiter)
-* Define the artifact publication to Frida repository
 
 ## Requirement
 
@@ -58,5 +57,5 @@ To use this plugin add the maven repository on settings.gradle (must be the firs
 then add the plugin on build.gradle
 
     plugins {
-        id "com.ekino.oss.plugin.java" version "0.0.1"
+        id "com.ekino.oss.gradle.plugin.java" version "0.0.1-SNAPSHOT"
     }
