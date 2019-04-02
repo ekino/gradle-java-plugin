@@ -2,6 +2,10 @@
 
 Java gradle plugin for Ekino projects
 
+[![Build Status](https://travis-ci.org/ekino/gradle-java-plugin.svg?branch=master)](https://travis-ci.org/ekino/gradle-java-plugin)
+[![GitHub (pre-)release](https://img.shields.io/github/release/ekino/gradle-java-plugin.svg)](https://github.com/ekino/gradle-java-plugin/releases)
+[![GitHub license](https://img.shields.io/github/license/ekino/gradle-java-plugin.svg)](https://github.com/ekino/gradle-java-plugin/blob/master/LICENSE.md)
+
 ## Overview
 
 This plugin configures the following tasks for any Ekino Java project :
@@ -57,5 +61,5 @@ To use this plugin add the maven repository on settings.gradle (must be the firs
 then add the plugin on build.gradle
 
     plugins {
-        id "com.ekino.oss.gradle.plugin.java" version "0.0.1-SNAPSHOT"
+        id "com.ekino.oss.gradle.plugin.java" version "1.0.0"
     }
