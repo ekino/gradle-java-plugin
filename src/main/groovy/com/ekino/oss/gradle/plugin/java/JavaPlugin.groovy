@@ -2,7 +2,7 @@
  * Copyright (c) 2019 ekino (https://www.ekino.com/)
  */
 
-package com.ekino.oss.gradle.plugin
+package com.ekino.oss.gradle.plugin.java
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
