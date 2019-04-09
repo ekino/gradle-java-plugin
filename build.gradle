@@ -40,21 +40,35 @@ gradlePlugin {
   plugins {
     gradleJava {
       id = "com.ekino.oss.gradle.plugin.java"
-      implementationClass = "com.ekino.oss.gradle.plugin.JavaPlugin"
+      implementationClass = "com.ekino.oss.gradle.plugin.java.JavaPlugin"
     }
   }
 }
 
-if (!project.hasProperty("ossrhUrl")) {
-  ext.ossrhUsername = ""
-  ext.ossrhPassword = ""
-  ext.ossrhUrl = ""
+task sourcesJar(type: Jar) {
+  classifier "sources"
+  from sourceSets.main.allJava
 }
 
+task javadocJar(type: Jar) {
+  classifier "javadoc"
+  from javadoc.destinationDir
+}
+
+artifacts {
+  archives jar
+  archives sourcesJar
+  archives javadocJar
+}
 
 publishing {
   publications {
     mavenJava(MavenPublication) {
+
+      from components.java
+
+      artifact sourcesJar
+      artifact javadocJar
 
       pom {
         name = 'Gradle java plugin'
@@ -78,8 +92,35 @@ publishing {
           url = 'https://github.com/ekino/gradle-java-plugin'
         }
       }
-      
-      from components.java
+
+    }
+
+    //needed by sonatype oss check in staging
+    mavenPluginMarker(MavenPublication) {
+      groupId gradlePlugin.plugins.gradleJava.id
+      artifactId gradlePlugin.plugins.gradleJava.id + ".gradle.plugin"
+      pom {
+        name = 'Gradle java plugin'
+        description = 'Java plugin applying some configuration for your builds (mavenPublish, testSets, etc ...)'
+        url = 'https://github.com/ekino/gradle-java-plugin'
+        licenses {
+          license {
+            name = 'MIT License (MIT)'
+            url = 'https://opensource.org/licenses/mit-license'
+          }
+        }
+        developers {
+          developer {
+            organization = 'ekino'
+            organizationUrl = 'https://www.ekino.com/'
+          }
+        }
+        scm {
+          connection = 'scm:git:git://github.com/ekino/gradle-java-plugin.git'
+          developerConnection = 'scm:git:ssh://github.com:ekino/gradle-java-plugin.git'
+          url = 'https://github.com/ekino/gradle-java-plugin'
+        }
+      }
     }
   }
   repositories {
@@ -99,4 +140,6 @@ task printVersion {
 
 signing {
   sign publishing.publications.mavenJava
+  //needed by sonatype oss check in staging
+  sign publishing.publications.mavenPluginMarker
 }
