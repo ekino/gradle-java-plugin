@@ -24,9 +24,11 @@ You need to have a JDK 8 at least.
 Nota Bene : some build variables may cause error for launching the gradle command.
 You have to add a `gradle.properties` file to the `~/.gradle` folder under your home directory with following configuration : 
 
-    publishingBaseUrl=<NEXUS_BASE_URL>
-    publishingLogin=<NEXUS_LOGIN>
-    publishingPassword=<NEXUS_PASSWORD>
+```
+publishingBaseUrl=<NEXUS_BASE_URL>
+publishingLogin=<NEXUS_LOGIN>
+publishingPassword=<NEXUS_PASSWORD>
+```
 
 <NEXUS_BASE_URL> is the Nexus prefix URL without the repository name, finishing with a dash '/'.
 
@@ -34,32 +36,47 @@ You have to add a `gradle.properties` file to the `~/.gradle` folder under your 
 
 This will create the JAR and run the tests
 
-    ./gradlew build
+```
+./gradlew build
+```
 
 ## Publish locally
 
 This will publish the JAR in your local Maven repository
 
-    ./gradlew publishToMavenLocal
+```
+./gradlew publishToMavenLocal
+```
 
-## Publish
-
-This will upload the plugin to Nexus repository
-
-    ./gradlew build publish
 
 ## Usage
 
 To use this plugin add the maven repository on settings.gradle (must be the first block of the file)
 
-    pluginManagement {
-      repositories {
-        mavenCentral()
-      }
+```groovy
+pluginManagement {
+  repositories {
+    mavenCentral()
+  }
+}    
+```
+
+Or for SNAPSHOT versions :
+
+```groovy
+pluginManagement {
+  repositories {
+    maven {
+      url 'https://oss.sonatype.org/content/repositories/snapshots/'
     }
+  }
+}
+```
 
 then add the plugin on build.gradle
 
-    plugins {
-        id "com.ekino.oss.gradle.plugin.java" version "1.0.0"
-    }
+```groovy
+plugins {
+    id "com.ekino.oss.gradle.plugin.java" version "1.0.0"
+}
+```

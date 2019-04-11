@@ -120,7 +120,19 @@ publishing {
           developerConnection = 'scm:git:ssh://github.com:ekino/gradle-java-plugin.git'
           url = 'https://github.com/ekino/gradle-java-plugin'
         }
+        dependencies {
+          compile group: project.group, name: project.name, version: project.version
+        }
+
       }
+      pom.withXml {
+        def dependency = asNode().appendNode('dependencies').appendNode('dependency')
+        dependency.appendNode('groupId', project.group)
+        dependency.appendNode('artifactId', project.name)
+        dependency.appendNode('version', project.version)
+
+      }
+
     }
   }
   repositories {
