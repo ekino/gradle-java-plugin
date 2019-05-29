@@ -73,10 +73,18 @@ pluginManagement {
 }
 ```
 
-then add the plugin on build.gradle
+Then add the plugin in your Gradle build script :
 
+Groovy
 ```groovy
 plugins {
-    id "com.ekino.oss.gradle.plugin.java" version "1.0.0"
+    id "com.ekino.oss.gradle.plugin.java" version "1.0.2"
+}
+```
+
+Kotlin
+```kotlin
+plugins {
+    id("com.ekino.oss.gradle.plugin.java") version "1.0.2"
 }
 ```
