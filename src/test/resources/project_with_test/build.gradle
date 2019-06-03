@@ -1,0 +1,13 @@
+plugins {
+    id "com.ekino.oss.gradle.plugin.java"
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+}
+repositories {
+    mavenCentral()
+}
+test {
+    useJUnitPlatform()
+}
