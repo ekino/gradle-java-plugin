@@ -7,6 +7,7 @@ import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
 plugins {
   `java-gradle-plugin`
   groovy
+  `kotlin-dsl`
   `maven-publish`
   signing
   id("net.researchgate.release") version "2.6.0"
@@ -23,6 +24,7 @@ dependencies {
   implementation("org.unbroken-dome.gradle-plugins:gradle-testsets-plugin:${property("testsetsPluginVersion")}")
 
   testImplementation(gradleTestKit())
+  testImplementation("io.strikt:strikt-core:${property("striktVersion")}")
   testImplementation("org.junit.jupiter:junit-jupiter-api:${property("junitJupiterVersion")}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${property("junitJupiterVersion")}")
 }
