@@ -11,7 +11,7 @@ Java gradle plugin for Ekino projects
 This plugin configures the following tasks for any Ekino Java project :
 
 * Apply the [Gradle Java plugin](https://docs.gradle.org/current/userguide/java_plugin.html)
-* Set the source/target compatibility to `1.11` java version
+* Set the source/target compatibility to `11` java version
 * Define the `integrationTest` source set (`it` directory) : [unbroken-dome/gradle-testsets-plugin](https://github.com/unbroken-dome/gradle-testsets-plugin)
 * Define the test report files aggregation
 * Replace `${project-version}` and `${project-description}` in YAML files by the gradle project version
@@ -20,6 +20,8 @@ This plugin configures the following tasks for any Ekino Java project :
 ## Requirement
 
 You need to have a JDK 8 at least.
+
+Gradle 5.0 or newer is required.
 
 Nota Bene : some build variables may cause error for launching the gradle command.
 You have to add a `gradle.properties` file to the `~/.gradle` folder under your home directory with following configuration : 
