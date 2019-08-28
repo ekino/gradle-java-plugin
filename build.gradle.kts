@@ -22,9 +22,8 @@ dependencies {
   implementation("org.unbroken-dome.gradle-plugins:gradle-testsets-plugin:${property("testsetsPluginVersion")}")
 
   testImplementation(gradleTestKit())
+  testImplementation("org.junit.jupiter:junit-jupiter:${property("junitJupiterVersion")}")
   testImplementation("io.strikt:strikt-core:${property("striktVersion")}")
-  testImplementation("org.junit.jupiter:junit-jupiter-api:${property("junitJupiterVersion")}")
-  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${property("junitJupiterVersion")}")
 }
 
 tasks.test {
