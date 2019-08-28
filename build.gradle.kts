@@ -6,7 +6,6 @@ import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
 
 plugins {
   `java-gradle-plugin`
-  groovy
   `kotlin-dsl`
   `maven-publish`
   signing
@@ -20,7 +19,6 @@ repositories {
 }
 
 dependencies {
-  implementation(localGroovy())
   implementation("org.unbroken-dome.gradle-plugins:gradle-testsets-plugin:${property("testsetsPluginVersion")}")
 
   testImplementation(gradleTestKit())
