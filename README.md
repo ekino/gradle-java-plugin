@@ -90,3 +90,11 @@ plugins {
     id("com.ekino.oss.gradle.plugin.java") version "1.0.2"
 }
 ```
+
+You can override Java version using a dedicated configuration (default is 11):
+```groovy
+javaPlugin {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+```
