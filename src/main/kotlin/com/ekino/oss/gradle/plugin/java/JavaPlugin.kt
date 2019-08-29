@@ -4,7 +4,6 @@
 
 package com.ekino.oss.gradle.plugin.java
 
-import org.gradle.api.JavaVersion
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -16,14 +15,7 @@ import org.gradle.api.tasks.testing.Test
 import org.gradle.api.tasks.testing.TestDescriptor
 import org.gradle.api.tasks.testing.TestListener
 import org.gradle.api.tasks.testing.TestResult
-import org.gradle.kotlin.dsl.apply
-import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.get
-import org.gradle.kotlin.dsl.getByName
-import org.gradle.kotlin.dsl.getValue
-import org.gradle.kotlin.dsl.register
-import org.gradle.kotlin.dsl.repositories
-import org.gradle.kotlin.dsl.the
+import org.gradle.kotlin.dsl.*
 import org.unbrokendome.gradle.plugins.testsets.TestSetsPlugin
 import org.unbrokendome.gradle.plugins.testsets.dsl.testSets
 
@@ -32,6 +24,8 @@ class JavaPlugin : Plugin<Project> {
   override fun apply(project: Project) {
     with(project) {
 
+      val javaPluginConfiguration = extensions.create(EXTENSION_NAME, JavaPluginConfiguration::class.java)
+
       // plugins
       apply<org.gradle.api.plugins.JavaPlugin>()
       apply<TestSetsPlugin>()
@@ -39,8 +33,12 @@ class JavaPlugin : Plugin<Project> {
       apply<MavenPublishPlugin>()
 
       // properties
-      setProperty("sourceCompatibility", JavaVersion.VERSION_11)
-      setProperty("targetCompatibility", JavaVersion.VERSION_11)
+      afterEvaluate {
+        with(javaPluginConfiguration) {
+          setProperty("sourceCompatibility", sourceCompatibility)
+          setProperty("targetCompatibility", targetCompatibility)
+        }
+      }
 
       addTasks()
 

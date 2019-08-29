@@ -10,12 +10,7 @@ import org.gradle.testkit.runner.TaskOutcome.SUCCESS
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.io.TempDir
 import strikt.api.expectThat
-import strikt.assertions.contains
-import strikt.assertions.exists
-import strikt.assertions.hasSize
-import strikt.assertions.isEqualTo
-import strikt.assertions.isNotNull
-import strikt.assertions.isNull
+import strikt.assertions.*
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
@@ -104,11 +99,31 @@ class JavaPluginIT {
     }
   }
 
-  private fun runTask(project: String): BuildResult {
+  @Test
+  fun `Should display project's properties with expected Java target`() {
+    val result = runTask("project_with_test", "properties")
+
+    expectThat(result.output) {
+      contains("sourceCompatibility: 1.8")
+      contains("targetCompatibility: 1.8")
+    }
+  }
+
+  @Test
+  fun `Should display project's properties with default Java target`() {
+    val result = runTask("project_with_test_and_integration_test", "properties")
+
+    expectThat(result.output) {
+      contains("sourceCompatibility: 11")
+      contains("targetCompatibility: 11")
+    }
+  }
+
+  private fun runTask(project: String, task: String = "build"): BuildResult {
     File("src/test/resources/$project").copyRecursively(tempDir.toFile())
 
     return GradleRunner.create()
-        .withArguments("build")
+        .withArguments(task)
         .withProjectDir(tempDir.toFile())
         .withTestKitDir(tempDir.toFile())
         .withPluginClasspath()
