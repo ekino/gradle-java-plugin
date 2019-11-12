@@ -5,7 +5,7 @@ Java gradle plugin for Ekino projects
 [![Build Status](https://travis-ci.org/ekino/gradle-java-plugin.svg?branch=master)](https://travis-ci.org/ekino/gradle-java-plugin)
 [![GitHub (pre-)release](https://img.shields.io/github/release/ekino/gradle-java-plugin.svg)](https://github.com/ekino/gradle-java-plugin/releases)
 [![GitHub license](https://img.shields.io/github/license/ekino/gradle-java-plugin.svg)](https://github.com/ekino/gradle-java-plugin/blob/master/LICENSE.md)
-
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=gradle-java-plugin&metric=alert_status)](https://sonarcloud.io/dashboard?id=gradle-java-plugin)
 ## Overview
 
 This plugin configures the following tasks for any Ekino Java project :
