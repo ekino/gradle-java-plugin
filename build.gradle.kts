@@ -173,9 +173,17 @@ signing {
   sign(publishing.publications[mavenPluginMarkerPublication])
 }
 
+tasks.jacocoTestReport {
+  reports {
+    xml.setEnabled(true)
+  }
+}
+
 sonarqube {
   properties {
     property("sonar.projectKey", "gradle-java-plugin")
     property("sonar.java.coveragePlugin", "jacoco")
+    property("sonar.junit.reportPaths", "${buildDir}/test-results/test")
+    property("sonar.coverage.jacoco.xmlReportPaths", "${buildDir}/reports/jacoco/test/jacocoTestReport.xml")
   }
 }
