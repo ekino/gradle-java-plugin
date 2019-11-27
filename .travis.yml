@@ -47,14 +47,14 @@ jobs:
       provider: releases
       api_key:
         secure: PfrSo/Px4svVMLHbY1aNo+f6nWzCRyQ3pb3GLgj85ELfDR3z8NTbYXZ+RxlQKd1wlgecnainz6jl/JI9giXvfLGxiPTsmHVeuS9fgwZhP6hVpAlu4G5/mNDIqShJ7NI4qF73WvKVl4SSgrWNPET02R08nRYCsEhqmzvedH5UGN5npQNHV7wkkOZ610VCwoWLP9XR/c/NMgDiEzW0qFDTBj/XLzucY25TTPhhX3pV+63YsTBW0oAKD/z5InUBN3EWUgJ2pmS1y7IoFE04h15J1GNUReiRbt3ubYDVM5woitrRKiN6hNPQ87lsbMA+m2Nmt1V04PE7jd5WuP3X+f56IzS5az0jr9+KyH3FmpDh4irjeMG08jaTpXVxmYqfdN9rGT155AQ8nK/SSN99aD+Q/NOsF8l0YswpnbuVNt0Ke3QtSHuw+LxqxvUCuKXCkiosCI9qeGrzPZlWZ1qB+TSN/lekcwN+i45VER8t1Ja96mkZPc/YAJTWOA7RedG3csMUg6dle9VYRVGsjMljCLuhOMZ9qDj15/imxUo2pyxBP8GpaA4hzTQg8yCaMt1zzNIFtK8tcXNSzUPoudfIOA2CMaycOFvzR2+CBQ3MwauJhB6lrK6bmvFYUyFWgirk7art9P72GGorxeZOi7gOYQq0Ri2Z3H+hm9jboHbbbQISonE=
-    file_glob: true
-    file: "$TRAVIS_BUILD_DIR/build/libs/*"
-    body: Release of $TRAVIS_TAG
-    skip_cleanup: true
-    draft: true
-    on:
-      repo: ekino/gradle-java-plugin
-      tags: true
+      file_glob: true
+      file: "$TRAVIS_BUILD_DIR/build/libs/*"
+      body: Release of $TRAVIS_TAG
+      skip_cleanup: true
+      draft: true
+      on:
+        repo: ekino/gradle-java-plugin
+        tags: true
 before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
