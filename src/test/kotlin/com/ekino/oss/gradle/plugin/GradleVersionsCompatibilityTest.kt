@@ -15,7 +15,7 @@ class GradleVersionsCompatibilityTest {
     @TempDir
     lateinit var tempDir: File
 
-    @ValueSource(strings = ["5.0", "5.4.1", "5.6.1", "6.2.2"])
+    @ValueSource(strings = ["5.6.4", "6.2.2"])
     @ParameterizedTest(name = "Gradle {0}")
     @DisplayName("Should work in Gradle version")
     fun shouldWorkInGradleVersion(gradleVersion: String) {
