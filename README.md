@@ -8,7 +8,7 @@ Java gradle plugin for Ekino projects
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ekino_gradle-java-plugin&metric=alert_status)](https://sonarcloud.io/dashboard?id=ekino_gradle-java-plugin)
 ## Overview
 
-This plugin configures the following tasks for any Ekino Java project :
+This plugin configures the following tasks for any Ekino Java project:
 
 * Apply the [Gradle Java plugin](https://docs.gradle.org/current/userguide/java_plugin.html)
 * Set the source/target compatibility to `11` java version
@@ -53,29 +53,7 @@ This will publish the JAR in your local Maven repository
 
 ## Usage
 
-To use this plugin add the maven repository on settings.gradle (must be the first block of the file)
-
-```groovy
-pluginManagement {
-  repositories {
-    mavenCentral()
-  }
-}    
-```
-
-Or for SNAPSHOT versions :
-
-```groovy
-pluginManagement {
-  repositories {
-    maven {
-      url 'https://oss.sonatype.org/content/repositories/snapshots/'
-    }
-  }
-}
-```
-
-Then add the plugin in your Gradle build script :
+Add the plugin in your Gradle build script:
 
 Groovy
 ```groovy

@@ -7,12 +7,11 @@ import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
 plugins {
   `java-gradle-plugin`
   `kotlin-dsl`
-  `maven-publish`
   jacoco
-  signing
   id("net.researchgate.release") version "2.6.0"
   id("se.bjurr.gitchangelog.git-changelog-gradle-plugin") version "1.60"
-  id("org.sonarqube") version "2.7.1"
+  id("org.sonarqube") version "2.8"
+  id("com.gradle.plugin-publish") version "0.10.1"
 }
 
 repositories {
@@ -58,119 +57,23 @@ gradlePlugin {
   }
 }
 
-val printVersion by tasks.registering {
-  println(project.version)
+pluginBundle {
+  website = "https://github.com/ekino/gradle-java-plugin"
+  vcsUrl = "https://github.com/ekino/gradle-java-plugin"
+  description = "Java plugin applying some configuration for your builds (mavenPublish, testSets, etc ...)"
+
+  (plugins) {
+    named(pluginName) {
+      displayName = "Java plugin"
+      tags = listOf("ekino", "java", "build", "junit5", "publish")
+      version = version
+    }
+  }
 }
 
 val gitChangelogTask by tasks.registering(GitChangelogTask::class) {
   file = File("CHANGELOG.md")
   templateContent = file("changelog.mustache").readText()
-}
-
-val sourcesJar by tasks.registering(Jar::class) {
-  archiveClassifier.set("sources")
-  from(sourceSets.main.get().allJava)
-}
-
-val javadocJar by tasks.registering(Jar::class) {
-  archiveClassifier.set("javadoc")
-  from(tasks.javadoc)
-}
-
-tasks {
-  artifacts {
-    archives(jar)
-    archives(sourcesJar)
-    archives(javadocJar)
-  }
-}
-
-val mavenJavaPublication = "mavenJava"
-val mavenPluginMarkerPublication = "mavenPluginMarker"
-publishing {
-  publications {
-    register<MavenPublication>(mavenJavaPublication) {
-
-      from(components["java"])
-
-      artifact(sourcesJar.get())
-      artifact(javadocJar.get())
-
-      pom {
-        name.set("Gradle java plugin")
-        description.set("Java plugin applying some configuration for your builds (mavenPublish, testSets, etc ...)")
-        url.set("https://github.com/ekino/gradle-java-plugin")
-        licenses {
-          license {
-            name.set("MIT License (MIT)")
-            url.set("https://opensource.org/licenses/mit-license")
-          }
-        }
-        developers {
-          developer {
-            organization.set("ekino")
-            organizationUrl.set("https://www.ekino.com/")
-          }
-        }
-        scm {
-          connection.set("scm:git:git://github.com/ekino/gradle-java-plugin.git")
-          developerConnection.set("scm:git:ssh://github.com:ekino/gradle-java-plugin.git")
-          url.set("https://github.com/ekino/gradle-java-plugin")
-        }
-      }
-    }
-
-    //needed by sonatype oss check in staging
-    register<MavenPublication>(mavenPluginMarkerPublication) {
-      groupId = gradlePlugin.plugins[pluginName].id
-      artifactId = "${gradlePlugin.plugins[pluginName].id}.gradle.plugin"
-
-      pom {
-        name.set("Gradle java plugin")
-        description.set("Java plugin applying some configuration for your builds (mavenPublish, testSets, etc ...)")
-        url.set("https://github.com/ekino/gradle-java-plugin")
-        licenses {
-          license {
-            name.set("MIT License (MIT)")
-            url.set("https://opensource.org/licenses/mit-license")
-          }
-        }
-        developers {
-          developer {
-            organization.set("ekino")
-            organizationUrl.set("https://www.ekino.com/")
-          }
-        }
-        scm {
-          connection.set("scm:git:git://github.com/ekino/gradle-java-plugin.git")
-          developerConnection.set("scm:git:ssh://github.com:ekino/gradle-java-plugin.git")
-          url.set("https://github.com/ekino/gradle-java-plugin")
-        }
-      }
-      pom.withXml {
-        val dependency = asNode().appendNode("dependencies").appendNode("dependency")
-        dependency.appendNode("groupId", project.group)
-        dependency.appendNode("artifactId", project.name)
-        dependency.appendNode("version", project.version)
-
-      }
-    }
-  }
-  repositories {
-    maven {
-      url = uri(property("ossrhUrl") as String)
-      credentials {
-        username = property("ossrhUsername") as String
-        password = property("ossrhPassword") as String
-      }
-    }
-  }
-}
-
-signing {
-  sign(publishing.publications[mavenJavaPublication])
-  //needed by sonatype oss check in staging
-  sign(publishing.publications[mavenPluginMarkerPublication])
 }
 
 tasks.jacocoTestReport {

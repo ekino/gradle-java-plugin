@@ -8,6 +8,8 @@ import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome.SUCCESS
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.condition.DisabledOnJre
+import org.junit.jupiter.api.condition.JRE.JAVA_8
 import org.junit.jupiter.api.io.TempDir
 import strikt.api.expectThat
 import strikt.assertions.*
@@ -48,10 +50,10 @@ class JavaPluginIT {
         .resolve("test")
     expectThat(testReportsDir).exists()
 
-    expectThat(File("$tempDir/build/libs").listFiles().size).isEqualTo(1)
+    expectThat(File("$tempDir/build/libs").listFiles().size) isEqualTo 1
 
     val yaml = Files.newDirectoryStream(Paths.get("$tempDir/build/resources/main"), "*.yml").toList()
-    expectThat(yaml).hasSize(1)
+    expectThat(yaml) hasSize 1
     expectThat(yaml[0].toFile().readText()) {
       contains("version: 1.0.0")
       contains("description: test_stuff")
@@ -59,6 +61,7 @@ class JavaPluginIT {
   }
 
   @Test
+  @DisabledOnJre(JAVA_8)
   fun `Should build project with integration tests`() {
     val result = runTask("project_with_test_and_integration_test")
 

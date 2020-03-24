@@ -36,6 +36,6 @@ class GradleVersionsCompatibilityTest {
             .forwardOutput()
             .build()
 
-        expectThat(result.task(":build")?.outcome).isEqualTo(TaskOutcome.SUCCESS)
+        expectThat(result.task(":build")?.outcome) isEqualTo TaskOutcome.SUCCESS
     }
 }
