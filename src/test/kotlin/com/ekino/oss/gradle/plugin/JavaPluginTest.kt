@@ -8,6 +8,9 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestFramework
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.condition.DisabledOnJre
+import org.junit.jupiter.api.condition.JRE.JAVA_8
+import strikt.api.expect
 import strikt.api.expectThat
 import strikt.assertions.containsExactly
 import strikt.assertions.isA
@@ -26,21 +29,24 @@ class JavaPluginTest {
 
     project.plugins.apply("com.ekino.oss.gradle.plugin.java")
 
-    expectThat(project.pluginManager.hasPlugin("java")).isTrue()
-    expectThat(project.pluginManager.hasPlugin("org.unbroken-dome.test-sets")).isTrue()
-    expectThat(project.pluginManager.hasPlugin("maven-publish")).isTrue()
+    expect {
+      that(project.pluginManager.hasPlugin("java")).isTrue()
+      that(project.pluginManager.hasPlugin("org.unbroken-dome.test-sets")).isTrue()
+      that(project.pluginManager.hasPlugin("maven-publish")).isTrue()
+    }
     expectThat(project.getTasksByName("aggregateJunitReports", false)).isNotEmpty()
   }
 
   @Test
+  @DisabledOnJre(JAVA_8)
   fun shouldTargetJava11ByDefault() {
     val project = ProjectBuilder.builder().build()
 
     project.plugins.apply("com.ekino.oss.gradle.plugin.java")
 
     val properties = project.properties
-    expectThat(properties["sourceCompatibility"]).isEqualTo(JavaVersion.VERSION_11)
-    expectThat(properties["targetCompatibility"]).isEqualTo(JavaVersion.VERSION_11)
+    expectThat(properties["sourceCompatibility"]) isEqualTo JavaVersion.VERSION_11
+    expectThat(properties["targetCompatibility"]) isEqualTo JavaVersion.VERSION_11
   }
 
   @Test
