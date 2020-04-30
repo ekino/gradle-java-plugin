@@ -131,18 +131,17 @@ class JavaPlugin : Plugin<Project> {
         publications.register<MavenPublication>("mavenJava") {
           from(components["java"])
         }
-      }
+        repositories {
+          maven {
+            val publishingBaseUrl = findProperty("publishingBaseUrl") as String
+            val projectVersion = project.version as String
 
-      repositories {
-        maven {
-          val publishingBaseUrl = findProperty("publishingBaseUrl") as String
-          val projectVersion = project.version as String
+            url = uri("$publishingBaseUrl${if (projectVersion.endsWith("-SNAPSHOT")) "snapshots" else "releases"}/")
 
-          url = uri("$publishingBaseUrl${if (projectVersion.endsWith("-SNAPSHOT")) "snapshots" else "releases"}/")
-
-          credentials {
-            username = findProperty("publishingLogin") as String
-            password = findProperty("publishingPassword") as String
+            credentials {
+              username = findProperty("publishingLogin") as String
+              password = findProperty("publishingPassword") as String
+            }
           }
         }
       }
