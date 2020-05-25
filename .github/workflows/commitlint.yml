@@ -1,0 +1,16 @@
+name: "Commit Lint"
+on: [pull_request]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v1
+        with:
+          failOnWarnings: true
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
