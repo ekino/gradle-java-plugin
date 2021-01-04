@@ -1,5 +1,6 @@
 name: "Build branch"
 on:
+  pull_request:
   push:
     branches:
       - "*"
