@@ -128,7 +128,6 @@ class JavaPluginIT {
     return GradleRunner.create()
         .withArguments(task)
         .withProjectDir(tempDir.toFile())
-        .withTestKitDir(tempDir.toFile())
         .withPluginClasspath()
         .forwardOutput()
         .build()
