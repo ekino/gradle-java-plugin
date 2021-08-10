@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 ekino (https://www.ekino.com/)
+ * Copyright (c) 2021 ekino (https://www.ekino.com/)
  */
 
 import se.bjurr.gitchangelog.plugin.gradle.GitChangelogTask
@@ -8,7 +8,6 @@ plugins {
   `java-gradle-plugin`
   `kotlin-dsl`
   jacoco
-  `maven-publish`
   id("net.researchgate.release") version "2.8.1"
   id("se.bjurr.gitchangelog.git-changelog-gradle-plugin") version "1.71.4"
   id("org.sonarqube") version "3.3"
@@ -17,7 +16,7 @@ plugins {
 
 repositories {
   gradlePluginPortal()
-  jcenter()
+  mavenCentral()
 }
 
 dependencies {
@@ -25,7 +24,7 @@ dependencies {
 
   testImplementation(gradleTestKit())
   testImplementation("org.junit.jupiter:junit-jupiter:${property("junitJupiterVersion")}")
-  testImplementation("io.strikt:strikt-core:${property("striktVersion")}")
+  testImplementation("io.strikt:strikt-jvm:${property("striktVersion")}")
 }
 
 tasks.test {
@@ -79,7 +78,7 @@ val gitChangelogTask by tasks.registering(GitChangelogTask::class) {
 
 tasks.jacocoTestReport {
   reports {
-    xml.isEnabled = true
+    xml.required.set(true)
   }
 }
 

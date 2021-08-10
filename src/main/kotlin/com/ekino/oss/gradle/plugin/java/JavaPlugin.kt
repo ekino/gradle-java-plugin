@@ -6,6 +6,7 @@ package com.ekino.oss.gradle.plugin.java
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
@@ -56,6 +57,7 @@ class JavaPlugin : Plugin<Project> {
                   .replace("\${project-description}", project.description as String)
             }
           }
+          duplicatesStrategy = DuplicatesStrategy.INCLUDE
         }
 
         configureTests()

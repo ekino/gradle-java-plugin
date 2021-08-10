@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 ekino (https://www.ekino.com/)
+ * Copyright (c) 2021 ekino (https://www.ekino.com/)
  */
 
 package com.ekino.oss.gradle.plugin
@@ -13,6 +13,7 @@ import org.junit.jupiter.api.condition.JRE.JAVA_8
 import org.junit.jupiter.api.io.TempDir
 import strikt.api.expectThat
 import strikt.assertions.*
+import strikt.java.exists
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
