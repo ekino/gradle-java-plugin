@@ -1,6 +1,6 @@
 # gradle java plugin
 
-Java gradle plugin for Ekino projects
+Java gradle plugin for ekino projects
 
 [![Build Status](https://travis-ci.org/ekino/gradle-java-plugin.svg?branch=master)](https://travis-ci.org/ekino/gradle-java-plugin)
 [![GitHub (pre-)release](https://img.shields.io/github/release/ekino/gradle-java-plugin.svg)](https://github.com/ekino/gradle-java-plugin/releases)
@@ -21,8 +21,7 @@ This plugin configures the following tasks for any Ekino Java project:
 
 You need to have a JDK 8 at least.
 
-It requires Gradle 6 (6.3 or later).
-Gradle 5.6 is also supported but this support is deprecated and will be removed in a future release.
+It requires Gradle 6.8 or later.
 
 Nota Bene : some build variables may cause error for launching the gradle command.
 You have to add a `gradle.properties` file to the `~/.gradle` folder under your home directory with following configuration : 
