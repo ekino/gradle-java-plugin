@@ -3,7 +3,7 @@ plugins {
 }
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.4.2'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
 }
 repositories {
     mavenCentral()
