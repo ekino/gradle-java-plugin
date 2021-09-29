@@ -19,7 +19,7 @@ This plugin configures the following tasks for any Ekino Java project:
 
 ## Requirement
 
-You need to have a JDK 8 at least.
+You need to have a JDK 11 at least.
 
 It requires Gradle 6.8 or later.
 
@@ -72,7 +72,7 @@ plugins {
 You can override Java version using a dedicated configuration (default is 11):
 ```groovy
 javaPlugin {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 ```

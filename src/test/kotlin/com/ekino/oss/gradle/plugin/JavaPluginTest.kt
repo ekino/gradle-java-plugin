@@ -8,8 +8,6 @@ import org.gradle.api.JavaVersion
 import org.gradle.api.internal.tasks.testing.junitplatform.JUnitPlatformTestFramework
 import org.gradle.testfixtures.ProjectBuilder
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.condition.DisabledOnJre
-import org.junit.jupiter.api.condition.JRE.JAVA_8
 import strikt.api.expect
 import strikt.api.expectThat
 import strikt.assertions.containsExactly
@@ -38,7 +36,6 @@ class JavaPluginTest {
   }
 
   @Test
-  @DisabledOnJre(JAVA_8)
   fun shouldTargetJava11ByDefault() {
     val project = ProjectBuilder.builder().build()
 
