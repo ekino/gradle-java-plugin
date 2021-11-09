@@ -3,6 +3,8 @@ package com.ekino.oss.gradle.plugin
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
 import org.junit.jupiter.api.DisplayName
+import org.junit.jupiter.api.condition.DisabledOnJre
+import org.junit.jupiter.api.condition.JRE.JAVA_17
 import org.junit.jupiter.api.io.TempDir
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.ValueSource
@@ -15,6 +17,7 @@ class GradleVersionsCompatibilityTest {
     @TempDir
     lateinit var tempDir: File
 
+    @DisabledOnJre(JAVA_17)
     @ValueSource(strings = ["6.8.3", "6.9", "7.1.1", "7.2"])
     @ParameterizedTest(name = "Gradle {0}")
     @DisplayName("Should work in Gradle version")

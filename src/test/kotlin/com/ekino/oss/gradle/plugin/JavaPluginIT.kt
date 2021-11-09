@@ -9,7 +9,7 @@ import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome.SUCCESS
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.condition.DisabledOnJre
-import org.junit.jupiter.api.condition.JRE.JAVA_8
+import org.junit.jupiter.api.condition.JRE.JAVA_11
 import org.junit.jupiter.api.io.TempDir
 import strikt.api.expectThat
 import strikt.assertions.*
@@ -25,6 +25,7 @@ class JavaPluginIT {
   lateinit var tempDir: Path
 
   @Test
+  @DisabledOnJre(JAVA_11)
   fun `Should build project with only unit tests`() {
     val result = runTask("project_with_test")
 
@@ -62,7 +63,6 @@ class JavaPluginIT {
   }
 
   @Test
-  @DisabledOnJre(JAVA_8)
   fun `Should build project with integration tests`() {
     val result = runTask("project_with_test_and_integration_test")
 
@@ -91,6 +91,7 @@ class JavaPluginIT {
   }
 
   @Test
+  @DisabledOnJre(JAVA_11)
   fun `Should display test report in output`() {
     val result = runTask("project_with_test")
 
@@ -108,8 +109,8 @@ class JavaPluginIT {
     val result = runTask("project_with_test", "properties")
 
     expectThat(result.output) {
-      contains("sourceCompatibility: 1.8")
-      contains("targetCompatibility: 1.8")
+      contains("sourceCompatibility: 17")
+      contains("targetCompatibility: 17")
     }
   }
 
